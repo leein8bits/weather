@@ -1,0 +1,30 @@
+main {
+  color: #15494d;
+  background: #9BB0B8;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Cochin";
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px #282C3B;
+  text-shadow: 0 0 5px #505468;
+}
+
+#tempBtn {
+  width: 150px;
+  height: 150px;
+  font-size: 3em;
+  margin: 10px;
+  background: #9BB0B8;
+  border: 0px;
+  color: #282C3B;
+}
+
+.well {
+  background: #788E94;
+}
