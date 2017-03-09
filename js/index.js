@@ -28,7 +28,8 @@ var status = "";
 var zipBox = document.getElementById("zipBox").value;
 var windDirection = "";
 var tempScale = "f";
-var tempK = "";
+var tempF = "";
+var tempC = "";
 var icon = ""; //image icon for weather type
 var city = "";
 
@@ -45,16 +46,18 @@ function ipGeo() {
 };
 
 function getWeather(zip) {
-  var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&appid=911eb4551548c2ce7c9261b89eadc067";
+    var url = "https://api.apixu.com/v1/current.json?key=c5323737d83c48e692023922170903&q=" + zip;
+
 
   $.getJSON(url).then(function(data) {
 
-    weather = data.weather[0].main;
-    city = data.name;
-    tempK = data.main.temp;
-    wind = Math.round(data.wind.speed * 2.236936); // returned in kpm convert to mph
-    windDirection = data.wind.deg;
-    icon = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"
+    weather = data.current.condition.text;
+    city = data.location.name;
+    tempF = data.current.temp_f;
+    tempC = data.current.temp_c;
+    wind = data.current.wind_mph;
+    windDirection = data.current.wind_degree;
+    icon = data.current.condition.icon ;
     updateScale();
     $("#wind").html("Windspeed is " + wind + " mph");
     $("#weather").html("You have " + weather + " skies");
@@ -106,12 +109,12 @@ function windBlown(wd) {
 
 function cOrF(k) {
   if (tempScale === "f") {
-    temp = (Math.round((tempK - 273.15) * 1.8) + 32) + " F";
+    temp = tempF;
   } else {
-    temp = Math.round(tempK - 273.15) + " C";
+    temp = tempC;
   }
   return temp;
-}; // takes the API kelvin output and converts to c or f based on scale selected by user...defaults to f.
+}; 
 
 function changeScale() {
   if (tempScale === "f") {
