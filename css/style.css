@@ -28,3 +28,7 @@ h1 {
 .well {
   background: #788E94;
 }
+
+#code.img {
+  min-height: 25px;
+}

@@ -33,17 +33,21 @@ var tempC = "";
 var icon = ""; //image icon for weather type
 var city = "";
 
-// ip based location because google removed non secure geolocation calls
-function ipGeo() {
-  $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
-    zip = data.zip;
-    status = data.status;
-    // $("#success").html(region); //test if it is working
-    $("#zip").html(zip);
-    getWeather(zip);
+          // ip based location because google removed non secure geolocation calls
+          function ipGeo() {
+            $.getJSON("https://freegeoip.net/json/?callback=?", function(data) {
+              zip = data.zip_code;
+              status = data.status;
+              // $("#success").html(region); //test if it is working
+              $("#zip").html(zip);
+              getWeather(zip);
 
-  });
-};
+            });
+          };
+
+
+// add geolocation 
+
 
 function getWeather(zip) {
     var url = "https://api.apixu.com/v1/current.json?key=c5323737d83c48e692023922170903&q=" + zip;
@@ -63,7 +67,7 @@ function getWeather(zip) {
     $("#weather").html("You have " + weather + " skies");
     $("#windDirection").html("from the " + windBlown(windDirection))
       // alert(weather); test
-    $("#code").html("<img  src ='" + icon + "' >");
+    $("#code").html("<img src ='" + icon + "' >");
     $("#city").html(city);
 
   });
@@ -109,9 +113,9 @@ function windBlown(wd) {
 
 function cOrF(k) {
   if (tempScale === "f") {
-    temp = tempF;
+    temp = tempF + "F";
   } else {
-    temp = tempC;
+    temp = tempC + "C";
   }
   return temp;
 }; 
